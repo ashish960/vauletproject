@@ -27,3 +27,13 @@ Route::post('/login',[UserController::class,'userlogin'])->name('user.login');
 
 //sessionend
 Route::get('/sessionend',[UserController::class,'sessionend'])->name('user.sessionend');
+
+
+//add money to balance
+Route::get('/addmoney',[UserController::class,'addmoney'])->name('user.addmoney');
+Route::post('/addmoneyinacc',[UserController::class,'addmoneyinacc'])->name('user.addmoneyinacc');
+
+
+
+//check balance
+Route::get('/checkbalance',[UserController::class,'checkbalance'])->name('user.checkbalance');

@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Models\Userdata;
 use App\Http\Requests\requests;
 use App\Http\Requests\loginrequest;
+use App\Http\Requests\addmoney;
 use Illuminate\Support\Facades\Hash;
 
 
@@ -44,11 +45,14 @@ class UserController extends Controller
     public function userlogin(loginrequest $request){
         $name=$request['name'];
         $user = Userdata::where('name' ,$name)->first();
+        //print_r($user);
 
          if ($user && Hash::check($request['password'], $user['password'])) {
 
+            session()->put('id',$user['id']);
             session()->put('name',$user['name']);
             session()->put('password',$user['password']);
+            session()->put('balance',$user['balance']);
             
 
             return view('index_view');
@@ -62,6 +66,46 @@ class UserController extends Controller
         return view('index_view');
     }
 
+
+    //addmoney
+       public function addmoney(){
+        return view('add_money');
+       }
+
+     //addmoeyinacc
+    public function addmoneyinacc(addmoney $request){ 
+        if(session()->has('balance')){
+            $id = session()->get('id');
+            $balance = session()->get('balance');
+            $addno=$request['addmoney'];
+            $addition= $balance + $addno;
+            echo $addition;
+
+            //adding data to database
+            $user= Userdata::where('id' ,$id);
+            print_r($user['balance']);
+            // $user->balance =$addition;
+            // $user->save();
+
+
+        //     echo"<pre>";
+        //     print_r($data);
+        //   echo"<pre>";
+        }
+        else{
+        }
+    }
+
+
+    //checkbalance
+    public function checkbalance(){
+        if(session()->has('balance')){
+            $balance = session()->get('balance');
+            echo "Your Balance is :" . $balance;
+            
+        }
+       
+    }
 
 
 }

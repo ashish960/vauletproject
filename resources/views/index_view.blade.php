@@ -8,8 +8,7 @@
   </head>
   <body>
     @php
-          $allData = session()->all();
-        // print_r($allData);
+         
       @endphp
     <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
         <div class="container-fluid">
@@ -30,7 +29,10 @@
                 <a class="nav-link active" aria-current="page" href="{{url('/')}}/login">Login</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{{url('/')}}/index">CheckBalance</a>
+                <a class="nav-link active" aria-current="page" href="{{url('/')}}/addmoney">AddMoney</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{{route('user.checkbalance')}}">CheckBalance</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="#">TransferMoney</a>
