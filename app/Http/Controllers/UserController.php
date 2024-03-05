@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Userdata;
 use App\Http\Requests\requests;
-
+use App\Http\Requests\loginrequest;
+use Illuminate\Support\Facades\Hash;
 
 
 class UserController extends Controller
@@ -26,7 +27,7 @@ class UserController extends Controller
             'name'=>$request->input('name'),
             'email'=>$request->input('email'),
             'phoneno'=>$request->input('phoneno'),
-            'password'=>$request->input('password'),
+            'password'=>Hash::make($request->input('password')),
 
         ]);
              
@@ -34,8 +35,36 @@ class UserController extends Controller
 
     //login
     public function login(){
+       
         return view('user_login_view');
     }
 
 
+//login
+    public function userlogin(loginrequest $request){
+        $name=$request['name'];
+        $user = Userdata::where('name' ,$name)->first();
+
+         if ($user && Hash::check($request['password'], $user['password'])) {
+
+            session()->put('username',$user['name']);
+            session()->put('password',$email['password']);
+            
+
+            return view('index_view');
+        } 
+        
+    }
+
+
+
 }
+
+
+
+
+
+
+
+
+

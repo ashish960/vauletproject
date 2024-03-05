@@ -23,3 +23,4 @@ Route::post('/signup',[UserController::class,'register'])->name('user.register')
 
 //login
 Route::get('/login',[UserController::class,'login']);
+Route::post('/login',[UserController::class,'userlogin'])->name('user.login');
