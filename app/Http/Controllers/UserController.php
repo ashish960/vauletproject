@@ -47,13 +47,19 @@ class UserController extends Controller
 
          if ($user && Hash::check($request['password'], $user['password'])) {
 
-            session()->put('username',$user['name']);
-            session()->put('password',$email['password']);
+            session()->put('name',$user['name']);
+            session()->put('password',$user['password']);
             
 
             return view('index_view');
         } 
         
+    }
+
+    //session end
+    public function sessionend(){
+        session()->flush();
+        return view('index_view');
     }
 
 
