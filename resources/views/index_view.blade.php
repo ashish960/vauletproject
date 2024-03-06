@@ -36,7 +36,7 @@
                 <a class="nav-link active" aria-current="page" href="{{route('user.checkbalance')}}">CheckBalance</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">TransferMoney</a>
+                <a class="nav-link active" aria-current="page" href="{{url('/')}}/TransferMoney">TransferMoney</a>
                
               </li>
             <ul></ul><ul></ul><ul></ul><ul></ul><ul></ul><ul></ul><ul></ul><ul></ul><ul></ul><ul></ul><ul></ul><ul></ul><ul></ul><ul></ul><ul></ul><ul></ul><ul></ul><ul></ul>

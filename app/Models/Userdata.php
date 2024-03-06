@@ -12,6 +12,7 @@ class Userdata extends Model
         'email',
         'phoneno',
         'password',
+        'balance'
     ];  
 
     

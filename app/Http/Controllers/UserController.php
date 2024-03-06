@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Http\Request;
+use Illuminate\Http\Request; 
 use App\Models\Userdata;
 use App\Http\Requests\requests;
 use App\Http\Requests\loginrequest;
 use App\Http\Requests\addmoney;
+use App\Http\Requests\TransferMoney;
 use Illuminate\Support\Facades\Hash;
 
 
@@ -85,7 +86,7 @@ class UserController extends Controller
 
             //adding data to database
             $user= Userdata::where('id' ,$id);
-            $user->update(['balance' => $addition]);
+            $user->update(['balance'=>$addition]);
             session(['balance' => $addition]);
             
 
@@ -109,6 +110,39 @@ class UserController extends Controller
        
     }
 
+    //TransferMoney
+    public function TransferMoney(){
+        return view('TransferMoney');
+    }
+    
+    public function TransferMoneyInAcc(TransferMoney $request){
+        echo"ima here";
+        if(session()->has('balance')){
+            $id = session()->get('id');
+            $balance = session()->get('balance');
+
+            //transfering amount from sender.
+            $TransferAmount=$request['amount'];
+            $TotalAmount=$balance-$TransferAmount;
+            echo $TotalAmount;
+            
+        }
+         
+            //updating data to database
+            $user= Userdata::where('id' ,$id);
+            $user->update(['balance' => $TotalAmount]);
+            session(['balance' => $TotalAmount]);
+        
+
+            //addding money to Recipient Database.
+             $accountno = $request['accountno'];
+             $Recipient= Userdata::where('id' ,$accountno)->first();
+             $RecipientBalance=$Recipient->balance;
+             $add= $RecipientBalance + $TransferAmount;
+             dd($add);
+             $Recipient->update(['balance' => $add]);
+        
+    }
 
 }
 

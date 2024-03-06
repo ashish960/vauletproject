@@ -37,3 +37,8 @@ Route::post('/addmoneyinacc',[UserController::class,'addmoneyinacc'])->name('use
 
 //check balance
 Route::get('/checkbalance',[UserController::class,'checkbalance'])->name('user.checkbalance');
+
+
+//add money to balance
+Route::get('/TransferMoney',[UserController::class,'TransferMoney']);
+Route::post('/TransferMoneyInAcc',[UserController::class,'TransferMoneyInAcc'])->name('user.TransferMoneyInAcc');
