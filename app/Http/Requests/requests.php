@@ -23,9 +23,9 @@ class requests extends FormRequest
     {
         return [
             'name'=>'required|string',
-            'email'=>'required',
+            'email'=>'required|email',
             'password'=>'required',
-            'phoneno'=>'required'
+            'phoneno'=>'required|numeric'
         ];
     }
 }

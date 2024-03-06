@@ -29,9 +29,9 @@ class UserController extends Controller
             'email'=>$request->input('email'),
             'phoneno'=>$request->input('phoneno'),
             'password'=>Hash::make($request->input('password')),
-
+            
         ]);
-             
+        return view('index_view');
     }
 
     //login
@@ -51,12 +51,14 @@ class UserController extends Controller
 
             session()->put('id',$user['id']);
             session()->put('name',$user['name']);
-            session()->put('password',$user['password']);
             session()->put('balance',$user['balance']);
             
 
             return view('index_view');
         } 
+        else{
+             echo "Invalid username and password";
+        }
         
     }
 
@@ -83,9 +85,9 @@ class UserController extends Controller
 
             //adding data to database
             $user= Userdata::where('id' ,$id);
-            print_r($user['balance']);
-            // $user->balance =$addition;
-            // $user->save();
+            $user->update(['balance' => $addition]);
+            session(['balance' => $addition]);
+            
 
 
         //     echo"<pre>";

@@ -22,7 +22,7 @@ class addmoney extends FormRequest
     public function rules(): array
     {
         return [
-            'addmoney'=>'required|integer',
+            'addmoney'=>'required|integer|gt:0',
         ];
     }
 }
