@@ -8,18 +8,28 @@
   </head>
   <body>
     <h1>Register</h1>
-    <form>
+    <form  action="{{route('user.register')}}" method="post">
+        @csrf
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Enter your Name</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          <input type="text" class="form-control" name ='name' id="exampleInputEmail1" aria-describedby="emailHelp">
+          <span class="text-danger"> @error('name'){{$message}}@enderror</span>
+             
         </div>
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Enter your Email</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <input type="email" class="form-control" name='email' id="exampleInputEmail1" aria-describedby="emailHelp">
+            <span class="text-danger"> @error('email'){{$message}}@enderror</span>
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Enter your Phoneno.</label>
+            <input type="phoneno" class="form-control" name='phoneno' id="exampleInputEmail1" aria-describedby="emailHelp">
+            <span class="text-danger"> @error('phoneno'){{$message}}@enderror</span>
           </div>
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Enter your Password</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <input type="password" class="form-control" name="password" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <span class="text-danger"> @error('password'){{$message}}@enderror</span>
           </div>
         <button type="submit" class="btn btn-primary">Signup</button>
       </form>

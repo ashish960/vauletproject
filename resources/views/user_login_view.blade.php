@@ -8,15 +8,19 @@
   </head>
   <body>
     <h1>Login</h1>
-    <form>
+   
+    <form  action="{{route('user.login')}}" method="post">
+        @csrf
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Enter Name</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+          <input type="text" class="form-control" name="name" id="exampleInputEmail1" aria-describedby="emailHelp">
+          <span class="text-danger"> @error('name'){{$message}}@enderror</span>
         </div>
         <div class="mb-3">
           <label for="exampleInputPassword1" class="form-label">Password</label>
-          <input type="password" class="form-control" id="exampleInputPassword1">
+          <input type="password" class="form-control" name="password" id="exampleInputPassword1">
+           <span class="text-danger"> @error('password'){{$message}}@enderror</span> 
+          
         </div>
         <button type="submit" class="btn btn-primary">forgot password</button>
         <button type="submit" class="btn btn-primary">Submit</button>
