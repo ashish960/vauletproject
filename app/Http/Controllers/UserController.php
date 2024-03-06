@@ -116,15 +116,21 @@ class UserController extends Controller
     }
     
     public function TransferMoneyInAcc(TransferMoney $request){
-        echo"ima here";
+        
         if(session()->has('balance')){
             $id = session()->get('id');
             $balance = session()->get('balance');
 
             //transfering amount from sender.
             $TransferAmount=$request['amount'];
+            if($TransferAmount <= $balance){
             $TotalAmount=$balance-$TransferAmount;
-            echo $TotalAmount;
+         
+            }
+            else{
+                  echo "The amount should be less that balance";
+                  exit();
+            }
             
         }
          
@@ -137,12 +143,20 @@ class UserController extends Controller
             //addding money to Recipient Database.
              $accountno = $request['accountno'];
              $Recipient= Userdata::where('id' ,$accountno)->first();
-             $RecipientBalance=$Recipient->balance;
-             $add= $RecipientBalance + $TransferAmount;
-             dd($add);
-             $Recipient->update(['balance' => $add]);
-        
-    }
+             if($Recipient == null){
+                echo  'invalid Account No';
+                exit;
+             }
+             else{
+                $RecipientBalance=$Recipient->balance;
+                $add= $RecipientBalance + $TransferAmount;
+              //  dd($add);
+                $Recipient->update(['balance' => $add]);
+                echo "transfer successful";
+           
+       }
+             }
+           
 
 }
 
